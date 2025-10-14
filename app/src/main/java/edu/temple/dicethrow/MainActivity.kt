@@ -15,9 +15,23 @@ class MainActivity : AppCompatActivity() {
 
         val rollButton = findViewById<Button>(R.id.rollDiceButton)
 
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragmentContainerView, DieFragment.newInstance(20))
-            .commit()
+        //makes a new fragment every single time the Activity is restarted/created
+        //change to making sure that there's no Fragment previously
+
+        //fragments can be labelled by tags!
+        /*if(savedInstanceState == null){
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragmentContainerView, DieFragment.newInstance(20))
+                .commit()
+        }*/
+        //or
+        if(supportFragmentManager.findFragmentById(R.id.fragmentContainerView) == null){
+            //if there's no Fragment attached to the container, add one
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragmentContainerView, DieFragment.newInstance(20))
+                .commit()
+        }
     }
 }
