@@ -44,6 +44,19 @@ class DieFragment : Fragment() {
     }
 
     fun throwDie() {
-        dieTextView.text = Random.nextInt(dieSides).toString()
+        dieTextView.text = (Random.nextInt(dieSides) + 1).toString()
+    }
+
+    companion object{
+        //creates an intance of our Fragment
+        fun newInstance(dieSides: Int) = DieFragment().apply{
+            //add info for it
+            arguments = Bundle().apply{
+                //the Die Fragements arguments are set to a Bundle
+                //that has an integer related to the DIESIDE label
+                //and places our argument
+                putInt(DIESIDE, dieSides)
+            }
+        }
     }
 }
