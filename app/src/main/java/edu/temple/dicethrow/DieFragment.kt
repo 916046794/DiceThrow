@@ -37,18 +37,16 @@ class DieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        throwDie()
-        view.setOnClickListener{
-            throwDie()
-        }
+        rollDie()
     }
 
-    fun throwDie() {
+    fun rollDie() {
         dieTextView.text = (Random.nextInt(dieSides) + 1).toString()
     }
 
     companion object{
-        //creates an intance of our Fragment
+        //creates an instance of our Fragment
+        //Fragment Factory based on Factory design pattern
         fun newInstance(dieSides: Int) = DieFragment().apply{
             //add info for it
             arguments = Bundle().apply{

@@ -33,5 +33,12 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.fragmentContainerView, DieFragment.newInstance(20))
                 .commit()
         }
+
+        //refactor, rename: renames every instance/reference to that function/class/file
+        rollButton.setOnClickListener {
+            //rollDie()
+            (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as DieFragment)
+                .rollDie()
+        }
     }
 }
