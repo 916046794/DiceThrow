@@ -63,6 +63,7 @@ class DieFragment : Fragment() {
             //there was no roll! if rolledNum is 0
             //but also...check if the savedInstanceState w/ur required flag
             //exists, or if the savedInstanceState itself isn't null
+            //if(savedInstanceState.getInt(ROLLEDNUMKEY) != null)
             rollDie()
         }
         else{
