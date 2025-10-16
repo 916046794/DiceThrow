@@ -11,7 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var dieViewModel: DieViewModel
+    //the below lazy only gets executed when you try to use the object and it's not
+    //executed more than once
+    private val dieViewModel: DieViewModel by lazy{
+        //the instantiation of DieViewModel is delegated by lazy
+        //and doesn't provide functionality for setters, but only the
+        //getters, which is why it's fine for a val and not a var.
+        ViewModelProvider(this)[DieViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,18 +29,7 @@ class MainActivity : AppCompatActivity() {
         //makes a new fragment every single time the Activity is restarted/created
         //change to making sure that there's no Fragment previously
 
-        //the below can't be executes before the Activity is active, and same/findViewById
-        //.get() isn't suggested so use []
-        dieViewModel = ViewModelProvider(this)[DieViewModel::class.java]
-
         //fragments can be labelled by tags!
-        /*if(savedInstanceState == null){
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.fragmentContainerView, DieFragment.newInstance(20))
-                .commit()
-        }*/
-        //or
         if(supportFragmentManager.findFragmentById(R.id.fragmentContainerView) == null){
             //if there's no Fragment attached to the container, add one
             supportFragmentManager
@@ -44,9 +40,8 @@ class MainActivity : AppCompatActivity() {
 
         //refactor, rename: renames every instance/reference to that function/class/file
         rollButton.setOnClickListener {
-            //rollDie()
-            (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as DieFragment)
-                .rollDie()
+            //triggers the rollDie() from the ViewModel
+            dieViewModel.rollDie()
         }
     }
 }
