@@ -7,8 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentContainer
+import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var dieViewModel: DieViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -17,6 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         //makes a new fragment every single time the Activity is restarted/created
         //change to making sure that there's no Fragment previously
+
+        //the below can't be executes before the Activity is active, and same/findViewById
+        //.get() isn't suggested so use []
+        dieViewModel = ViewModelProvider(this)[DieViewModel::class.java]
 
         //fragments can be labelled by tags!
         /*if(savedInstanceState == null){
