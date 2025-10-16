@@ -29,14 +29,7 @@ class MainActivity : AppCompatActivity() {
         //makes a new fragment every single time the Activity is restarted/created
         //change to making sure that there's no Fragment previously
 
-        //fragments can be labelled by tags!
-        if(supportFragmentManager.findFragmentById(R.id.fragmentContainerView) == null){
-            //if there's no Fragment attached to the container, add one
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.fragmentContainerView, DieFragment.newInstance(20))
-                .commit()
-        }
+        dieViewModel.setDieSides(20)
 
         //refactor, rename: renames every instance/reference to that function/class/file
         rollButton.setOnClickListener {
